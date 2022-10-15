@@ -1,7 +1,8 @@
 from django.db import models
+from django.core.validators import MaxValueValidator, MinValueValidator
 
 # Create your models here.
 class Thing(models.Model):
-    first_name = models.CharField(max_length=30)
-    description = models.CharField(max_length=300)
-    quantity = models.IntegerField()
+    name = models.CharField(max_length=30,unique=True)
+    description = models.CharField(max_length=120,blank=True)
+    quantity = models.IntegerField(default=1, validators = [MaxValueValidator(100),MinValueValidator(0)])
